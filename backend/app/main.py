@@ -57,11 +57,13 @@ def create_application() -> FastAPI:
 
     # Top-level direct health check route for infrastructure / load balancers
     app.include_router(health_router, prefix="", tags=["System"])
+    app.include_router(health_router, prefix="/api", tags=["System"])
 
     # Versioned API routes
     app.include_router(api_router, prefix=settings.API_V1_STR)
 
     @app.get("/", tags=["System"], summary="API Root")
+    @app.get("/api", tags=["System"], summary="API Root (Alias)")
     async def root():
         return {
             "name": settings.APP_NAME,

@@ -3,7 +3,9 @@
  * Centralizes request handling, base URL resolution, token injection, and standardized error parsing.
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL !== undefined
+  ? import.meta.env.VITE_API_BASE_URL
+  : (import.meta.env.DEV ? 'http://localhost:8000' : '');
 const API_VERSION_PATH = import.meta.env.VITE_API_VERSION_PATH || '/api/v1';
 
 export class ApiError extends Error {

@@ -1,7 +1,15 @@
 from typing import List, Union
+from pathlib import Path
 import json
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+_BASE_DIR = Path(__file__).resolve().parent.parent.parent
+_ENV_PATHS = (
+    str(_BASE_DIR.parent / ".env"),
+    str(_BASE_DIR / ".env"),
+    ".env",
+)
 
 
 class Settings(BaseSettings):
@@ -44,7 +52,7 @@ class Settings(BaseSettings):
         return []
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=_ENV_PATHS,
         env_file_encoding="utf-8",
         case_sensitive=True,
         extra="ignore",
