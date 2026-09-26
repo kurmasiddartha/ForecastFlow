@@ -1,7 +1,10 @@
 import logging
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from pathlib import Path
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from app.core.config import settings
 from app.database import mongo_manager, init_database_indexes
 from app.routes.api import api_router
@@ -72,6 +75,45 @@ def create_application() -> FastAPI:
             "health": "/health",
             "api_v1": settings.API_V1_STR,
         }
+
+    # Locate the built frontend static directory
+    module_dir = Path(__file__).resolve().parent
+    dist_candidates = [
+        module_dir.parent.parent / "dist",
+        module_dir.parent / "dist",
+        module_dir.parent.parent / "frontend" / "dist",
+        Path("dist"),
+        Path("backend/dist"),
+        Path("frontend/dist"),
+    ]
+    resolved_dist = None
+    for cand in dist_candidates:
+        if cand.exists() and (cand / "index.html").exists():
+            resolved_dist = cand.resolve()
+            break
+
+    if resolved_dist:
+        logger.info("Serving frontend static bundle from: %s", resolved_dist)
+        assets_dir = resolved_dist / "assets"
+        if assets_dir.exists():
+            app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+
+        @app.get("/", include_in_schema=False)
+        async def serve_index():
+            return FileResponse(str(resolved_dist / "index.html"))
+
+        @app.get("/{full_path:path}", include_in_schema=False)
+        async def serve_spa(full_path: str):
+            if full_path.startswith("api") or full_path in ["docs", "redoc", "openapi.json", "health"]:
+                raise HTTPException(status_code=404, detail="Not Found")
+
+            candidate_file = resolved_dist / full_path
+            if candidate_file.is_file():
+                return FileResponse(str(candidate_file))
+
+            return FileResponse(str(resolved_dist / "index.html"))
+    else:
+        logger.warning("Frontend static build directory not found. Only API routes will be served.")
 
     return app
 
