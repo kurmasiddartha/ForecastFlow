@@ -1,6 +1,6 @@
 # ForecastFlow
 
-> **AI Demand Forecasting & Intelligent Restocking for Retail & Kirana Stores**
+> **AI Inventory and Demand Forecasting System for Small Businesses**
 
 ForecastFlow is a full-stack inventory management and predictive demand forecasting platform. It replaces guesswork and paper ledger notebooks with automated machine learning forecasts, supplier lead-time awareness, inventory risk diagnostics, and formula-driven restock recommendations with 1-click purchase orders.
 

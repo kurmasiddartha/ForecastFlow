@@ -119,7 +119,7 @@ export function LandingPage() {
           {/* Eyebrow badge */}
           <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white/95 px-5 py-2 text-sm font-bold text-indigo-700 shadow-xs backdrop-blur-sm">
             <Sparkles className="h-4 w-4 text-indigo-600" />
-            <span>AI Demand Forecasting & Restocking for Retail & Kirana Stores</span>
+            <span>AI Inventory and Demand Forecasting System for Small Businesses</span>
           </div>
 
           {/* Main Title */}

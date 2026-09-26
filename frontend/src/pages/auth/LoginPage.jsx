@@ -135,7 +135,7 @@ export function LoginPage() {
             Sign in to ForecastFlow
           </h1>
           <p className="text-sm text-slate-600 font-medium">
-            AI Demand Forecasting & Restocking for Small Business
+            AI Inventory and Demand Forecasting System for Small Businesses
           </p>
         </div>
 
