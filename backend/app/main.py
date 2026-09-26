@@ -64,6 +64,7 @@ def create_application() -> FastAPI:
 
     @app.get("/", tags=["System"], summary="API Root")
     @app.get("/api", tags=["System"], summary="API Root (Alias)")
+    @app.get("/index.html", include_in_schema=False)
     async def root():
         return {
             "name": settings.APP_NAME,
