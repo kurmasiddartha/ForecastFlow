@@ -80,9 +80,7 @@ mongo_manager = MongoManager()
 
 
 async def get_database() -> AsyncIOMotorDatabase:
-    """Dependency provider for FastAPI route endpoints, ensuring connection in serverless lifecycles."""
-    if mongo_manager.db is None or not mongo_manager.is_connected:
-        await mongo_manager.connect()
+    """Dependency provider for FastAPI route endpoints."""
     if mongo_manager.db is None:
-        raise RuntimeError(f"Database connection could not be established. {mongo_manager.last_error or 'Check MONGODB_URL.'}")
+        raise RuntimeError("Database connection has not been initialized.")
     return mongo_manager.db
