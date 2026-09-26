@@ -62,9 +62,8 @@ def create_application() -> FastAPI:
     # Versioned API routes
     app.include_router(api_router, prefix=settings.API_V1_STR)
 
-    @app.get("/", tags=["System"], summary="API Root")
-    @app.get("/api", tags=["System"], summary="API Root (Alias)")
-    @app.get("/index.html", include_in_schema=False)
+    @app.get("/api", tags=["System"], summary="API Root")
+    @app.get("/api/v1", tags=["System"], summary="API Root (v1)")
     async def root():
         return {
             "name": settings.APP_NAME,
