@@ -1,7 +1,42 @@
 from typing import Any, Dict, List, Optional
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import Ridge
+try:
+    from sklearn.linear_model import Ridge
+except ImportError:
+    class Ridge:
+        """Lightweight NumPy-only L2 regularized Ridge estimator to avoid heavy scipy/sklearn dependencies on serverless."""
+
+        def __init__(self, alpha: float = 1.0):
+            self.alpha = float(alpha)
+            self.coef_: np.ndarray = np.array([])
+            self.intercept_: float = 0.0
+
+        def fit(self, X, y):
+            X_arr = np.asarray(X, dtype=float)
+            y_arr = np.asarray(y, dtype=float)
+            if len(X_arr) == 0:
+                self.coef_ = np.zeros(X_arr.shape[1] if X_arr.ndim > 1 else 0)
+                self.intercept_ = 0.0
+                return self
+            x_mean = np.mean(X_arr, axis=0)
+            y_mean = np.mean(y_arr)
+            X_c = X_arr - x_mean
+            y_c = y_arr - y_mean
+            n_features = X_arr.shape[1]
+            A = X_c.T @ X_c + max(self.alpha, 1e-4) * np.eye(n_features)
+            b = X_c.T @ y_c
+            try:
+                self.coef_ = np.linalg.solve(A, b)
+            except np.linalg.LinAlgError:
+                self.coef_ = np.linalg.lstsq(A, b, rcond=None)[0]
+            self.intercept_ = float(y_mean - x_mean @ self.coef_)
+            return self
+
+        def predict(self, X):
+            X_arr = np.asarray(X, dtype=float)
+            return X_arr @ self.coef_ + self.intercept_
+
 from app.ml.models.base import BaseForecaster
 
 
