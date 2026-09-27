@@ -19,7 +19,7 @@ import { IntelligencePage } from '../pages/intelligence/IntelligencePage';
 import { RecommendationsPage } from '../pages/recommendations/RecommendationsPage';
 import { DemoPage } from '../pages/demo/DemoPage';
 import { ProtectedRoute } from '../components/common/ProtectedRoute';
-import { Layers, Sparkles, ArrowRight } from 'lucide-react';
+import { PublicNavbar } from '../components/layout/PublicNavbar';
 
 /**
  * RootRoute: If the user is authenticated, route them to /dashboard.
@@ -67,73 +67,8 @@ function DemoRoute() {
 
   return (
     <div className="min-h-screen bg-slate-100 font-sans text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
-      {/* Top Floating Glass Navigation Bar (Matches Landing Page exactly) */}
-      <header className="sticky top-3 sm:top-4 z-50 w-full px-3 sm:px-6 pointer-events-none">
-        <div className="mx-auto max-w-6xl pointer-events-auto">
-          <div className="flex h-16 items-center justify-between rounded-2xl border border-slate-200/90 bg-white/90 px-4 sm:px-6 backdrop-blur-xl shadow-lg shadow-slate-900/5 ring-1 ring-black/5 transition-all">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-sky-500 text-white shadow-sm shadow-indigo-500/25 ring-1 ring-black/5 transition-transform group-hover:scale-105">
-                <Layers className="h-5 w-5" />
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-lg font-black tracking-tight text-slate-900">
-                  Forecast<span className="text-indigo-600">Flow</span>
-                </span>
-                <span className="hidden sm:inline-block rounded-md bg-indigo-50 border border-indigo-100/90 px-2 py-0.5 text-xs font-bold text-indigo-700 tracking-wide">
-                  AI RETAIL
-                </span>
-              </div>
-            </Link>
-
-            {/* Center Navigation Track (Pill Island) */}
-            <nav className="hidden md:flex items-center gap-1.5 rounded-xl bg-slate-100/80 p-1.5 border border-slate-200/60 shadow-inner">
-              <Link
-                to="/#features"
-                className="text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-white px-3.5 py-1.5 rounded-lg transition-all"
-              >
-                Features
-              </Link>
-              <Link
-                to="/#how-it-works"
-                className="text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-white px-3.5 py-1.5 rounded-lg transition-all"
-              >
-                How It Works
-              </Link>
-              <Link
-                to="/#kirana"
-                className="text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-white px-3.5 py-1.5 rounded-lg transition-all"
-              >
-                Kirana Store
-              </Link>
-              <Link
-                to="/demo"
-                className="inline-flex items-center gap-1.5 text-sm font-bold text-indigo-700 bg-white border border-indigo-200/80 shadow-xs px-3.5 py-1.5 rounded-lg transition-all"
-              >
-                <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
-                <span>Interactive Demo</span>
-              </Link>
-            </nav>
-
-            {/* Right Action Buttons */}
-            <div className="flex items-center gap-3">
-              <Link
-                to="/login"
-                className="rounded-lg px-3.5 py-2 text-sm font-bold text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors"
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/register"
-                className="inline-flex items-center gap-2 rounded-xl bg-slate-900 hover:bg-indigo-600 px-4.5 py-2 text-sm font-bold text-white shadow-sm transition-all hover:scale-102 active:scale-98"
-              >
-                <span>Get Started</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Top Floating Glass Navigation Bar */}
+      <PublicNavbar />
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         <DemoPage />
       </main>

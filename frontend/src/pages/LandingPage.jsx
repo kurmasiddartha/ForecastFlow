@@ -11,119 +11,30 @@ import {
   Store,
   Calculator,
 } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { PublicNavbar } from '../components/layout/PublicNavbar';
 
 export function LandingPage() {
-  const { isAuthenticated } = useAuth();
-
   return (
     <div className="min-h-screen bg-white text-slate-800 font-sans antialiased selection:bg-indigo-600 selection:text-white">
-      {/* ------------------------------------------------------------- */}
       {/* Top Floating Glass Navigation Bar */}
-      {/* ------------------------------------------------------------- */}
-      <header className="sticky top-3 sm:top-4 z-50 w-full px-3 sm:px-6 pointer-events-none">
-        <div className="mx-auto max-w-6xl pointer-events-auto">
-          <div className="flex h-16 items-center justify-between rounded-2xl border border-slate-200/90 bg-white/90 px-4 sm:px-6 backdrop-blur-xl shadow-lg shadow-slate-900/5 ring-1 ring-black/5 transition-all">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-sky-500 text-white shadow-sm shadow-indigo-500/25 ring-1 ring-black/5 transition-transform group-hover:scale-105">
-                <Layers className="h-5 w-5" />
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-lg font-black tracking-tight text-slate-900">
-                  Forecast<span className="text-indigo-600">Flow</span>
-                </span>
-                <span className="hidden sm:inline-block rounded-md bg-indigo-50 border border-indigo-100/90 px-2 py-0.5 text-xs font-bold text-indigo-700 tracking-wide">
-                  AI RETAIL
-                </span>
-              </div>
-            </Link>
-
-            {/* Center Navigation Track (Pill Island) */}
-            <nav className="hidden md:flex items-center gap-1.5 rounded-xl bg-slate-100/80 p-1.5 border border-slate-200/60 shadow-inner">
-              <a
-                href="#features"
-                className="text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-white px-3.5 py-1.5 rounded-lg transition-all"
-              >
-                Features
-              </a>
-              <a
-                href="#how-it-works"
-                className="text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-white px-3.5 py-1.5 rounded-lg transition-all"
-              >
-                How It Works
-              </a>
-              <a
-                href="#kirana"
-                className="text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-white px-3.5 py-1.5 rounded-lg transition-all"
-              >
-                Kirana Store
-              </a>
-              <Link
-                to="/demo"
-                className="inline-flex items-center gap-1.5 text-sm font-bold text-indigo-700 bg-white border border-indigo-200/80 shadow-xs px-3.5 py-1.5 rounded-lg transition-all hover:bg-indigo-50/50"
-              >
-                <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
-                <span>Interactive Demo</span>
-              </Link>
-            </nav>
-
-            {/* Right Action Buttons */}
-            <div className="flex items-center gap-3">
-              <Link
-                to="/demo"
-                className="md:hidden inline-flex items-center gap-1.5 text-xs font-bold text-indigo-700 bg-indigo-50 border border-indigo-200/70 px-3 py-1.5 rounded-lg"
-              >
-                <Sparkles className="h-3 w-3" />
-                <span>Demo</span>
-              </Link>
-
-              {isAuthenticated ? (
-                <Link
-                  to="/dashboard"
-                  className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4.5 py-2 text-sm font-bold text-white shadow-sm shadow-indigo-600/25 hover:bg-indigo-700 transition-all hover:scale-102 active:scale-98"
-                >
-                  <span>Dashboard</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              ) : (
-                <>
-                  <Link
-                    to="/login"
-                    className="rounded-lg px-3.5 py-2 text-sm font-bold text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="inline-flex items-center gap-2 rounded-xl bg-slate-900 hover:bg-indigo-600 px-4.5 py-2 text-sm font-bold text-white shadow-sm transition-all hover:scale-102 active:scale-98"
-                  >
-                    <span>Get Started</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </header>
+      <PublicNavbar />
 
       {/* ------------------------------------------------------------- */}
       {/* Hero Section */}
       {/* ------------------------------------------------------------- */}
-      <section className="relative pt-12 pb-20 sm:pt-18 sm:pb-28 overflow-hidden bg-gradient-to-b from-indigo-50/70 via-slate-50/40 to-white">
+      <section className="relative pt-6 sm:pt-14 pb-14 sm:pb-24 overflow-hidden bg-gradient-to-b from-indigo-50/70 via-slate-50/40 to-white">
         {/* Soft background ambient gradient blooms */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[450px] w-[850px] rounded-full bg-gradient-to-tr from-indigo-200/40 via-sky-100/50 to-amber-100/40 blur-[90px] pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[350px] sm:h-[450px] w-[95%] sm:w-[850px] rounded-full bg-gradient-to-tr from-indigo-200/40 via-sky-100/50 to-amber-100/40 blur-[70px] sm:blur-[90px] pointer-events-none" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-6 sm:space-y-8">
           {/* Eyebrow badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white/95 px-5 py-2 text-sm font-bold text-indigo-700 shadow-xs backdrop-blur-sm">
-            <Sparkles className="h-4 w-4 text-indigo-600" />
-            <span>AI Inventory and Demand Forecasting System for Small Businesses</span>
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-indigo-200 bg-white/95 px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-bold text-indigo-700 shadow-xs backdrop-blur-sm max-w-[95%] sm:max-w-none">
+            <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-indigo-600" />
+            <span className="truncate sm:whitespace-normal">AI Inventory & Demand Forecasting for Small Businesses</span>
           </div>
 
           {/* Main Title */}
-          <h1 className="mx-auto max-w-4xl text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.15]">
+          <h1 className="mx-auto max-w-4xl text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.2]">
             Never Run Out of Fast Stock. <br />
             <span className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-sky-600 bg-clip-text text-transparent">
               Never Lock Cash in Dead Inventory.
@@ -131,25 +42,25 @@ export function LandingPage() {
           </h1>
 
           {/* Subtitle */}
-          <p className="mx-auto max-w-3xl text-lg sm:text-xl text-slate-700 font-medium leading-relaxed">
+          <p className="mx-auto max-w-3xl text-sm sm:text-lg lg:text-xl text-slate-600 font-normal sm:font-medium leading-relaxed px-2 sm:px-0">
             ForecastFlow replaces guesswork and paper notebooks with intelligent forecasting. Predict customer demand, account for distributor lead times, and replenish shelves with 1-click purchase orders.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-3 w-full max-w-xs sm:max-w-none mx-auto">
             <Link
               to="/register"
-              className="inline-flex items-center gap-2.5 rounded-xl bg-indigo-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-indigo-600/25 hover:bg-indigo-700 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 px-7 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white shadow-lg shadow-indigo-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <span>Start Free Trial</span>
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
             </Link>
 
             <Link
               to="/demo"
-              className="inline-flex items-center gap-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 px-8 py-4 text-base font-bold text-slate-800 shadow-xs transition-all hover:scale-[1.02]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 px-7 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-slate-800 shadow-xs transition-all hover:scale-[1.02]"
             >
-              <Store className="h-5 w-5 text-amber-600" />
+              <Store className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-600" />
               <span>Explore Kirana Demo</span>
             </Link>
           </div>
