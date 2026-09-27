@@ -3,6 +3,7 @@
 .env.local
 .env.*.local
 *.env
+.vercel
 
 # Python
 __pycache__/

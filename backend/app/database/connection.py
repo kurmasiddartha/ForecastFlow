@@ -18,6 +18,8 @@ class MongoManager:
 
     async def connect(self) -> bool:
         """Establishes connection to MongoDB Atlas and verifies with a ping command."""
+        if self.is_connected and self.db is not None:
+            return True
         try:
             logger.info("Connecting to MongoDB at: %s", settings.MONGODB_URL.split("@")[-1])
             self.client = AsyncIOMotorClient(
@@ -81,6 +83,8 @@ mongo_manager = MongoManager()
 
 async def get_database() -> AsyncIOMotorDatabase:
     """Dependency provider for FastAPI route endpoints."""
+    if mongo_manager.db is None or not mongo_manager.is_connected:
+        await mongo_manager.connect()
     if mongo_manager.db is None:
         raise RuntimeError("Database connection has not been initialized.")
     return mongo_manager.db
