@@ -180,7 +180,7 @@ export function PublicNavbar() {
                     onClick={closeMenu}
                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 py-2.5 text-xs font-bold text-white shadow-sm"
                   >
-                    <span>Get Started Free</span>
+                    <span>Get Started</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                   <Link

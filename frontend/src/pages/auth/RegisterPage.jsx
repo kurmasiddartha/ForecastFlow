@@ -170,7 +170,7 @@ export function RegisterPage() {
               </>
             ) : (
               <>
-                <span>Get Started Free</span>
+                <span>Create Account</span>
                 <ArrowRight className="h-4 w-4" />
               </>
             )}
