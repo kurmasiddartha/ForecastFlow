@@ -3,8 +3,10 @@
  * Centralizes request handling, base URL resolution, token injection, and standardized error parsing.
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
-const API_VERSION_PATH = import.meta.env.VITE_API_VERSION_PATH || '/api/v1';
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = rawBaseUrl.replace(/\/+$/, '');
+const rawVersionPath = import.meta.env.VITE_API_VERSION_PATH || '/api/v1';
+const API_VERSION_PATH = (rawVersionPath.startsWith('/') ? rawVersionPath : `/${rawVersionPath}`).replace(/\/+$/, '');
 
 export class ApiError extends Error {
   constructor(message, status, data = null) {
@@ -16,7 +18,8 @@ export class ApiError extends Error {
 }
 
 export async function request(endpoint, options = {}) {
-  const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${cleanEndpoint}`;
   
   const headers = {
     'Content-Type': 'application/json',
