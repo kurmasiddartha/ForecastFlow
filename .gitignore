@@ -50,3 +50,7 @@ frontend/dist-ssr/
 *~
 .DS_Store
 Thumbs.db
+
+# Presentations & Raw Template Files (Root directory only)
+/ppt/
+!frontend/src/pages/ppt/
