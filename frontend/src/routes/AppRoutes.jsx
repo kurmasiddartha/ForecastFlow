@@ -18,6 +18,7 @@ import { ForecastPage } from '../pages/forecasting/ForecastPage';
 import { IntelligencePage } from '../pages/intelligence/IntelligencePage';
 import { RecommendationsPage } from '../pages/recommendations/RecommendationsPage';
 import { DemoPage } from '../pages/demo/DemoPage';
+import { PptPage } from '../pages/ppt/PptPage';
 import { ProtectedRoute } from '../components/common/ProtectedRoute';
 import { PublicNavbar } from '../components/layout/PublicNavbar';
 
@@ -76,6 +77,42 @@ function DemoRoute() {
   );
 }
 
+/**
+ * PptRoute: Allows both authenticated users (in MainLayout) and prospective
+ * evaluators/visitors (with an open SaaS header) to explore the Review-II presentation deck.
+ */
+function PptRoute() {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-3">
+        <div className="h-8 w-8 animate-spin rounded-full border-3 border-indigo-600 border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return (
+      <ProtectedRoute>
+        <MainLayout>
+          <PptPage />
+        </MainLayout>
+      </ProtectedRoute>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-100 font-sans text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
+      {/* Top Floating Glass Navigation Bar */}
+      <PublicNavbar />
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        <PptPage />
+      </main>
+    </div>
+  );
+}
+
 export function AppRoutes() {
   return (
     <Routes>
@@ -90,6 +127,9 @@ export function AppRoutes() {
 
       {/* Demo Walkthrough Route (Accessible publicly or in dashboard) */}
       <Route path="/demo" element={<DemoRoute />} />
+
+      {/* Project Review PPT Deck & Specs Route (Accessible publicly or in dashboard) */}
+      <Route path="/ppt" element={<PptRoute />} />
 
       {/* Protected Application Routes */}
       <Route
